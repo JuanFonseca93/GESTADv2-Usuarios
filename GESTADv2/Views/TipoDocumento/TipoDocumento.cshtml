@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<Core.Dominio.TipoDocumento>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "TipoDocumento";
+}
+
+<h2>TipoDocumento</h2>
+<br /> <br />
+<div class="btn-pagina-agregar" style="float:right; display: inline-block;">
+
+    @using (Html.BeginForm("BuscarTipo", "TipoDocumento", FormMethod.Get))
+    {
+        <p>
+            Buscar usuario: @Html.TextBox("nombre")
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+
+    @using (Html.BeginForm("TipoDocumento", "TipoDocumnto", FormMethod.Get))
+    {
+        <p>
+            <input type="submit" value="Ver lista" class="btn btn-primary" />
+        </p>
+    }
+
+    <br />
+
+</div>
+
+@using (Html.BeginForm("CrearTipoDocumento", "TipoDocumento", FormMethod.Get))
+{
+    <input type="submit" value="Nuevo Tipo" class="btn btn-primary" />
+}
+<br /><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#00003c">#</th>
+            <th style="color:#ffffff; background:#00003c">Area</th>
+            <th style="color:#ffffff; background:#00003c">Descripcion</th>
+            <th style="color:#ffffff; background:#00003c">Opciones</th>
+            <th style="color:#ffffff; background:#00003c">Rutas</th>
+        </tr>
+        @foreach (var Area in Model)
+        {
+            <tr>
+                <th scope="row">@Area.idTipo</th>
+                <td>@Area.nombreTipo</td>
+                <td>@Area.detallesTipo</td>
+                <td>
+                    @Html.ActionLink("Editar",
+                                            "ActualizarTipo",
+                                            "TipoDocumento",
+                                            new { idArea = @Area.idTipo }, new { @class = "btn btn-primary" }
+                                            )
+                </td>
+                <td>
+                    @Html.ActionLink("Asignar Ruta",
+                                            "AsignarRutasN1",
+                                            "TipoDocumento",
+                                            new { idArea = @Area.idTipo }, new { @class = "btn btn-primary" }
+                                            )
+                </td>
+            </tr>
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("TipoDocumento", new
+{ pagina }))

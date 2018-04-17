@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<Core.Dominio.Documento>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Documento";
+}
+
+<h2>Documentos Pendientes</h2>
+
+@Html.ActionLink("Documentos Aceptados",
+                                            "DocumentoA",
+                                            "Documento",
+                                            null, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Documentos rechazados",
+                                            "DocumentoR",
+                                            "Documento",
+                                            null, new { @class = "btn btn-primary" }
+                                            )
+
+<br /> <br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#00003c">#</th>
+            <th style="color:#ffffff; background:#00003c">Area</th>
+            <th style="color:#ffffff; background:#00003c">Descripcion</th>
+        </tr>
+        @foreach (var Area in Model)
+        {
+            <tr>
+                <th scope="row">@Area.idDocumento</th>
+                <td>@Area.nombreDocumento</td>
+                <td>@Area.fechaSubidaDocumento</td>
+                <td>
+                    @Html.ActionLink("Aceptar",
+                                  "AceptarDocumento",
+                                  "Documento",
+                                  new { idUsuario = @Area.idDocumento }, new { @class = "btn btn-primary" }
+                                  )
+
+                    @Html.ActionLink("Rechazar",
+                                  "RechazarDocumento",
+                                  "Documento",
+                                  new { idUsuario = @Area.idDocumento }, new { @class = "btn btn-danger" }
+                                  )
+                </td>
+            </tr>
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("Documento", new
+{ pagina }))

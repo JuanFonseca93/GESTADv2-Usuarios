@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")*@
+    @Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")
+</head>
+<body>
+    
+    
+    <div class="container body-content">
+        <h1 class="form-text text-center text-primary">Bienvenido a GESTAD</h1>
+        <br />
+        @using (Html.BeginForm("login", "Login", FormMethod.Post))
+        {
+            
+
+            <div class="form-group">
+                @Html.Label("Correo:")
+                @Html.Editor("correo", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Contraseña:")
+                @Html.Editor("pass", new { htmlAttributes = new { @class = "form-control", Type = "Password" } })
+            </div>
+            <div>
+                <small id="emailHelp" class="form-text text-danger">@ViewBag.msj</small>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+                @Html.ActionLink("Registro", "CrearUsuario", "Login", null,
+                                new { @class = "btn btn-danger btn-large" })
+            </div>
+
+        }
+    </div>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/Scripts/jsrender.min.js")
+@Scripts.Render("~/Scripts/ej/web/ej.web.all.min.js")
+</html>

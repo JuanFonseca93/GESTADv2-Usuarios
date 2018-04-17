@@ -1,0 +1,94 @@
+﻿@model PagedList.IPagedList<Core.Dominio.Nivel4>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "AsignarPermisos";
+    var nombreUsu = ViewBag.Nombre;
+    var id = ViewBag.id;
+    bool coin = false;
+}
+<h2>Asignar Rutas de N4</h2>
+
+@Html.ActionLink("Asignar Ruta N5",
+                                            "AsignarRutasN5",
+                                            "TipoDocumento",
+                                            new { idArea = id }, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Asignar Ruta N3",
+                                            "AsignarRutasN3",
+                                            "TipoDocumento",
+                                            new { idArea = id }, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Asignar Ruta N4",
+                                            "AsignarRutasN4",
+                                            "TipoDocumento",
+                                            new { idArea = id }, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Asignar Ruta N2",
+                                            "AsignarRutasN2",
+                                            "TipoDocumento",
+                                            new { idArea = id }, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Asignar Ruta N1",
+                                            "AsignarRutasN1",
+                                            "TipoDocumento",
+                                            new { idArea = id }, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.Label("Seleccione los permisos para el Tipo de DOcumento:")
+@nombreUsu
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#007bbb">#</th>
+            <th style="color:#ffffff; background:#007bbb">Nombre</th>
+            <th style="color:#ffffff; background:#007bbb">Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var permiso in Model)
+        {
+            <tr>
+                <th scope="row">@permiso.idN</th>
+                <td>@permiso.nombreN</td>
+                <td>@permiso.descripcionN</td>
+                <td>
+                <td>
+                    @foreach (var permUsu in ViewBag.PermisosUsu)
+                {
+                    if (permiso.idN == permUsu.idN)
+                    {
+                        coin = true;
+                    }
+                }
+                    @if (!coin)
+                {
+                        @Html.ActionLink("Asignar", "ActionAsignarN4",
+                  new { idUsuario = id, idPermiso = @permiso.idN },
+                  new { @class = "btn btn-primary btn-large", id = "add" })
+                        coin = false;
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Quitar", "ActionQuitarN4",
+                  new { idUsuario = id, idPermiso = @permiso.idN },
+                  new { @class = "btn btn-danger btn-large", id = "del" })
+                        coin = false;
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("AsignarRutasN4", new
+{ pagina, idUsuario = id }))
+
+@Html.ActionLink("Cancelar", "TipoDocumento", "TipoDocumento", null,
+                                   new { @class = "btn btn-danger btn-large" })

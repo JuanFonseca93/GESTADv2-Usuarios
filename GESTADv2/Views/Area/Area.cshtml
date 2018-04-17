@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<Core.Dominio.Area>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Area";
+}
+
+<h2>Areas</h2>
+<br /> <br />
+<div class="btn-pagina-agregar" style="float:right; display: inline-block;">
+
+    @using (Html.BeginForm("BuscarArea", "Area", FormMethod.Get))
+    {
+        <p>
+            Buscar usuario: @Html.TextBox("nombre")
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+
+    @using (Html.BeginForm("Area", "Area", FormMethod.Get))
+    {
+        <p>
+            <input type="submit" value="Ver lista" class="btn btn-primary" />
+        </p>
+    }
+
+    <br />
+
+</div>
+
+@using (Html.BeginForm("CrearArea", "Area", FormMethod.Get))
+{
+    <input type="submit" value="Nueva Area" class="btn btn-primary" />
+}
+<br /><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#00003c">#</th>
+            <th style="color:#ffffff; background:#00003c">Area</th>
+            <th style="color:#ffffff; background:#00003c">Descripcion</th>
+        </tr>
+        @foreach (var Area in Model)
+        {
+            <tr>
+                <th scope="row">@Area.idArea</th>
+                <td>@Area.nombreArea</td>
+                <td>@Area.descripcionArea</td>
+                <td>
+                    @Html.ActionLink("Editar",
+                                       "ActualizarArea",
+                                       "Area",
+                                       new { idArea = @Area.idArea }, new { @class = "btn btn-primary" }
+                                       )
+                </td>
+            </tr>
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("Area", new
+{ pagina }))

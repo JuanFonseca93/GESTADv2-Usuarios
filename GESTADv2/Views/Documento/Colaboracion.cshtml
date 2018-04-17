@@ -1,0 +1,33 @@
+﻿@model Core.Dominio.Colaboracion
+@{
+    ViewBag.Title = "Colaboracion";
+}
+
+<h2>Colaboracion</h2>
+
+
+@using (Html.BeginForm("ActionColaboracion", "Documento",FormMethod.Post))
+{
+    
+    <input type="text" value="@ViewBag.idD" hidden name="idDocumento"/>
+
+    <div class="form-group">
+        @Html.Label("Tipo de Colaboracion:")
+        @Html.DropDownListFor(model => model.idTipoColaboracion, new SelectList(ViewBag.tp, "idTipoColaboracion", "nombreTipoColaboracion"), new { @class = "form-control" })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.idTipoColaboracion)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Usuario de Colaboracion:")
+        @Html.DropDownListFor(model => model.idUsuario, new SelectList(ViewBag.us, "idUsuario", "nombreUsuario"), new { @class = "form-control" })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.idUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-success btn-lg" />
+    </div>
+
+
+}
+
+

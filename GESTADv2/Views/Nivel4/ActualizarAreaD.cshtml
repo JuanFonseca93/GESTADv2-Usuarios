@@ -1,0 +1,36 @@
+﻿@model Core.Dominio.Nivel4
+
+@{
+    ViewBag.Title = "ActualizarNivel1";
+}
+
+<h2>Actualizar Area</h2>
+
+@using (Html.BeginForm("ActionActualizarAreaD", "Nivel4", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.idN)
+
+    <div class="form-group">
+        @Html.Label("Area del Tipo:")
+        @Html.DropDownListFor(model => model.nivel3, new SelectList(ViewBag.Areas, "idN", "nombreN"), new { @class = "form-control" })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.nivel3)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Nombre:")
+        @Html.EditorFor(model => model.nombreN, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.nombreN)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Descripcion:")
+        @Html.EditorFor(model => model.descripcionN, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.descripcionN)</small>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        @Html.ActionLink("Cancelar", "AreaDoc", "Nivel4", null,
+                                     new { @class = "btn btn-danger btn-large" })
+    </div>
+}

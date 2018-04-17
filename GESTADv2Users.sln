@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GESTADv2Users", "GESTADv2\GESTADv2Users.csproj", "{45D9A394-C065-42DA-9248-43C6F29C6BC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{84596047-CF55-46FB-8DDD-1D506A01AF40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{FD4341A2-B68D-4905-999E-3B05322261C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45D9A394-C065-42DA-9248-43C6F29C6BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D9A394-C065-42DA-9248-43C6F29C6BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D9A394-C065-42DA-9248-43C6F29C6BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D9A394-C065-42DA-9248-43C6F29C6BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84596047-CF55-46FB-8DDD-1D506A01AF40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84596047-CF55-46FB-8DDD-1D506A01AF40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84596047-CF55-46FB-8DDD-1D506A01AF40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84596047-CF55-46FB-8DDD-1D506A01AF40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4341A2-B68D-4905-999E-3B05322261C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4341A2-B68D-4905-999E-3B05322261C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4341A2-B68D-4905-999E-3B05322261C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4341A2-B68D-4905-999E-3B05322261C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

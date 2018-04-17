@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<Core.Dominio.Documento>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Documento";
+}
+
+<h2>Documentos Colaborados</h2>
+
+<br /> <br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#00003c">#</th>
+            <th style="color:#ffffff; background:#00003c">Nombre</th>
+            <th style="color:#ffffff; background:#00003c">Fecha Subida</th>
+            <th style="color:#ffffff; background:#00003c">Aciones</th>
+        </tr>
+        @foreach (var Area in Model)
+        {
+            <tr>
+                <th scope="row">@Area.idDocumento</th>
+                <td>@Area.nombreDocumento</td>
+                <td>@Area.fechaSubidaDocumento</td>
+                <td>
+                    @Html.ActionLink("Eliminar Colaboracion",
+                                            "EliColaboracion",
+                                            "Documento",
+                                            new { idDocumento = Area.idDocumento }, new { @class = "btn btn-primary" }
+                                            )
+                </td>
+            </tr>
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("Documento", new
+{ pagina }))
+

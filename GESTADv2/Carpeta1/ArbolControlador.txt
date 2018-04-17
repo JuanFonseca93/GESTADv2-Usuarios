@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using GESTAD.Models;
+//hay que investigar el e
+using C1.Web.Mvc.Grid;
+
+namespace GESTAD.Controllers
+{
+    public partial class ArbolController : Controller
+    {
+        // GET: Arbol     
+        public ActionResult TreeView()
+        {
+            var list = GESTAD.Models.Folder.Create(Server.MapPath("~")).Children;
+            
+            return View(list);
+        }
+    }
+}

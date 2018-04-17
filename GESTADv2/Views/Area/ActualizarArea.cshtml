@@ -1,0 +1,33 @@
+﻿@model Core.Dominio.Area
+
+@{
+    ViewBag.Title = "Actualizar Area";
+}
+
+<h2>Actualizar area</h2>
+
+
+
+
+@using (Html.BeginForm("ActionActualizarArea", "Area", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.idArea)
+
+    <div class="form-group">
+        @Html.Label("Nombre:")
+        @Html.EditorFor(model => model.nombreArea, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.nombreArea)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Descripcion:")
+        @Html.EditorFor(model => model.descripcionArea, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.descripcionArea)</small>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        @Html.ActionLink("Cancelar", "Area", "Area", null,
+                                                    new { @class = "btn btn-danger btn-large" })
+    </div>
+}

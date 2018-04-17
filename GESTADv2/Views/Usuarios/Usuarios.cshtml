@@ -1,0 +1,95 @@
+﻿@model PagedList.IPagedList<Core.Dominio.Usuario>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h2>Usuarios Pendientes</h2>
+<br /> 
+
+@Html.ActionLink("Usuarios Aceptados",
+                                            "UsuariosA",
+                                            "Usuarios",
+                                            null, new { @class = "btn btn-primary" }
+                                            )
+
+@Html.ActionLink("Usuarios rechazados",
+                                            "UsuariosR",
+                                            "Usuarios",
+                                            null, new { @class = "btn btn-primary" }
+                                            )
+
+<br />
+<br/>
+<div class="btn-pagina-agregar" style="float:right; display: inline-block;">
+
+    @using (Html.BeginForm("BuscarUsuario", "Usuarios", FormMethod.Get))
+    {
+        <p>
+            Buscar usuario: @Html.TextBox("nombre")
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+
+    @using (Html.BeginForm("Usuarios", "Usuarios", FormMethod.Get))
+    {
+        <p>
+            <input type="submit" value="Ver lista" class="btn btn-primary" />
+        </p>
+    }
+
+    <br />
+
+</div>
+
+@using (Html.BeginForm("CrearUsuario", "Usuarios", FormMethod.Get))
+{
+    <input type="submit" value="Nuevo usuario" class="btn btn-primary" />
+}
+<br /><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="color:#ffffff; background:#00003c">#</th>
+            <th style="color:#ffffff; background:#00003c">Nombre</th>
+            <th style="color:#ffffff; background:#00003c">Área</th>
+            <th style="color:#ffffff; background:#00003c">Correo</th>
+        </tr>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <th scope="row">@usuario.idUsuario</th>
+                <td>@usuario.nombreUsuario</td>
+                <td>@usuario.institucionUsuario</td>
+                <td>@usuario.correoUsuario</td>
+                <td>
+                    @Html.ActionLink("Editar",
+                                  "ActualizarUsuario",
+                                  "Usuarios",
+                                  new { idUsuario = @usuario.idUsuario }, new { @class = "btn btn-primary" }
+                                  )
+
+                    @Html.ActionLink("Aceptar",
+                                  "AceptarUsuario",
+                                  "Usuarios",
+                                  new { idUsuario = @usuario.idUsuario }, new { @class = "btn btn-primary" }
+                                  )
+
+                    @Html.ActionLink("Rechazar",
+                                  "RechazarUsuario",
+                                  "Usuarios",
+                                  new { idUsuario = @usuario.idUsuario }, new { @class = "btn btn-danger" }
+                                  )
+                </td>
+            </tr>
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pagina => Url.Action("Usuarios", new
+{ pagina }))

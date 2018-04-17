@@ -1,0 +1,75 @@
+﻿@model Core.Dominio.Usuario
+
+@{
+    ViewBag.Title = "ActualizarUsuario";
+}
+
+<h2>Actualizar Usuario</h2>
+
+@using (Html.BeginForm("ActionActualizarUsuario", "Usuarios", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.idUsuario)
+
+    <div class="form-group">
+        @Html.Label("Nombre:")
+        @Html.EditorFor(model => model.nombreUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.nombreUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Correo:")
+        @Html.EditorFor(model => model.correoUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.correoUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Contraseña:")
+        @Html.EditorFor(model => model.passwordUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.passwordUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Institucio:")
+        @Html.EditorFor(model => model.institucionUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.institucionUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Telefono:")
+        @Html.EditorFor(model => model.telefonoUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.telefonoUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Curp:")
+        @Html.EditorFor(model => model.curpUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.curpUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Fecha de nacimiento:")
+        @Html.EditorFor(model => model.fechaNacimientoUsuario, new { htmlAttributes = new { @class = "form-control" } })
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.fechaNacimientoUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Genero:")
+        @Html.DropDownListFor(model => model.generoUsuario, new SelectList(new List<Object>{
+new { value = "Hombre" , text = "Hombre"  },
+new { value = "Mujer" , text = "Mujer" } }, "value", "text"),  new { @class = "form-control" } )
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.generoUsuario)</small>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Area:")
+        @Html.DropDownListFor(model => model.idArea, new SelectList(ViewBag.Areas, "idArea", "nombreArea"), new { @class = "form-control" } )
+        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.area)</small>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Actualizar" class="btn btn-primary" />
+        @Html.ActionLink("Cancelar", "Usuarios", "Usuarios", null,
+                                     new { @class = "btn btn-danger btn-large" })
+    </div>
+}
