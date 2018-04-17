@@ -82,7 +82,7 @@ namespace GESTADv2.Controllers
                     unitOfWork.Complete();
 
                     var fromAddress = new MailAddress("gestadutsoe@gmail.com", "GESTAD");
-                    var toAddress = new MailAddress("exsala01@gmail.com", "Administrador");
+                    var toAddress = new MailAddress("marroyoal@utsoe.edu.mx", "Administrador");
                     const string fromPassword = "Gestad00";
                     const string subject = "Nuevo Usuario";
 
