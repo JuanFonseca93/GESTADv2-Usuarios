@@ -437,7 +437,7 @@ namespace GESTADv2.Controllers
                     smtp.Send(message);
                 }
 
-                return RedirectToAction("Documento");
+                return RedirectToAction("DocUser");
             }
             else
             {
