@@ -406,7 +406,7 @@ namespace GESTADv2.Controllers
 
 
 
-                //unitOfWork.Complete();
+                unitOfWork.Complete();
 
                 Usuario Uppd2 = unitOfWork.Usuarios.Get(Int32.Parse(id));
                 var fromAddress = new MailAddress("gestadutsoe@gmail.com", "GESTAD");
