@@ -475,7 +475,7 @@ namespace GESTADv2.Controllers
             unitOfWork = new UnitOfWork(_context);
             ViewBag.idD = obj.idDocumento;
             List<Usuario> us = new List<Usuario>();
-            foreach (var u in unitOfWork.Usuarios.GetAll())
+            foreach (var u in _context.Usuarios.Where(d => d.Estatus == 2))
             {
                 us.Add(u);
             }

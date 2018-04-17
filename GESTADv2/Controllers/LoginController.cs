@@ -58,6 +58,8 @@ namespace GESTADv2.Controllers
         [HttpPost]
         public ActionResult ActionCrearUsuario(Usuario obj)
         {
+            _context = new BDContext();
+            unitOfWork = new UnitOfWork(_context);
             obj.Estatus = 1;
             var ob = 1;
             foreach (var nusuario in unitOfWork.Usuarios.GetAll())
@@ -67,50 +69,56 @@ namespace GESTADv2.Controllers
                     ob++;
                 }
             }
-
-            if (ModelState.IsValid && ob == 1)
+            if (ob == 1)
             {
-                _context = new BDContext();
-                unitOfWork = new UnitOfWork(_context);
-                unitOfWork.Usuarios.Add(obj);
-
-                
-
-                unitOfWork.Complete();
-
-                var fromAddress = new MailAddress("gestadutsoe@gmail.com", "GESTAD");
-                var toAddress = new MailAddress("exsala01@gmail.com", "Administrador");
-                const string fromPassword = "Gestad00";
-                const string subject = "Nuevo Usuario";
-
-                string mensaje = "La persona " + obj.nombreUsuario + " Creo una nueva cuenta, porfavor acepte o rechace esta solicitud";
-
-
-                string body = mensaje;
-
-                var smtp = new SmtpClient
+                if (ModelState.IsValid)
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                };
-                using (var message = new MailMessage(fromAddress, toAddress)
-                {
-                    Subject = subject,
-                    Body = body
-                })
-                {
-                    smtp.Send(message);
+                    _context = new BDContext();
+                    unitOfWork = new UnitOfWork(_context);
+                    unitOfWork.Usuarios.Add(obj);
+
+
+
+                    unitOfWork.Complete();
+
+                    var fromAddress = new MailAddress("gestadutsoe@gmail.com", "GESTAD");
+                    var toAddress = new MailAddress("exsala01@gmail.com", "Administrador");
+                    const string fromPassword = "Gestad00";
+                    const string subject = "Nuevo Usuario";
+
+                    string mensaje = "La persona " + obj.nombreUsuario + " Creo una nueva cuenta, porfavor acepte o rechace esta solicitud";
+
+
+                    string body = mensaje;
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                    };
+                    using (var message = new MailMessage(fromAddress, toAddress)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+
+                    return RedirectToAction("Index", new { Mensaje = "Usuario creado, Porfavor espere a que un administrador lo acepte" });
                 }
-
-                return RedirectToAction("Index", new { Mensaje = "Usuario creado, Porfavor espere a que un administrador lo acepte" });
+                else
+                {
+                    return RedirectToAction("CrearUsuario", obj);
+                }
             }
             else
             {
-                return RedirectToAction("Index", new { Mensaje = "Ya Existe un usuario con ese correo o curp"});
+                return RedirectToAction("Index", new { Mensaje = "Ya Existe un usuario con ese correo o curp" });
             }
         }
 
